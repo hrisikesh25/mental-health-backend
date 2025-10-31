@@ -1,14 +1,39 @@
 import express from "express"
+import HealthData from "../models/HealthData.js"
+
 const router = express.Router()
 
-// Example dynamic data (you can replace with DB query)
-router.get("/", (req, res) => {
-  const data = {
-    heartRate: [78, 82, 79, 84, 76, 80, 83, 81],
-    sleep: [7, 6.8, 7.5, 6.9, 8, 7.2, 7.8, 7],
-    hrv: [65, 70, 68, 72, 66, 71, 69, 70],
+// GET all health data
+router.get("/", async (req, res) => {
+  try {
+    const data = await HealthData.find().sort({ createdAt: -1 }).limit(1) // get latest
+    if (!data || data.length === 0) {
+      return res.status(404).json({ message: "No health data found" })
+    }
+
+    const latest = data[0]
+    res.json({
+      heartRate: latest.heartRate,
+      sleep: latest.sleep,
+      hrv: latest.hrv,
+    })
+  } catch (err) {
+    console.error("Error fetching health data:", err)
+    res.status(500).json({ error: "Server error" })
   }
-  res.json(data)
+})
+
+// (Optional) POST route to add new health data
+router.post("/", async (req, res) => {
+  try {
+    const { userId, heartRate, sleep, hrv } = req.body
+    const newData = new HealthData({ userId, heartRate, sleep, hrv })
+    await newData.save()
+    res.status(201).json({ message: "Health data saved successfully" })
+  } catch (err) {
+    console.error("Error saving health data:", err)
+    res.status(500).json({ error: "Server error" })
+  }
 })
 
 export default router
