@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import connectDB from "./config/db.js";
 import authRoutes from "./routes/authRoutes.js";
 import healthDataRoutes from "./routes/healthDataRoutes.js"
+import voiceEmotionRoutes from "./routes/voiceEmotionRoutes.js"
 
 dotenv.config();
 const app = express();
@@ -22,6 +23,7 @@ connectDB();
 // Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/healthdata", healthDataRoutes)
+app.use("/api/voiceemotion", voiceEmotionRoutes)
 
 // Test route
 app.get("/api/test", (req, res) => {
