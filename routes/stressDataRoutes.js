@@ -1,8 +1,6 @@
 import express from "express";
-import { getStressData } from "../controllers/stressDataController.js";
+import { getStressData } from "../controllers/stressFusionController.js";
 
 const router = express.Router();
-
-router.get("/stress-data", getStressData);
-
+router.get("/stressdata", getStressData);
 export default router;

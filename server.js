@@ -9,6 +9,8 @@ import facialEmotionRoutes from "./routes/facialEmotionRoutes.js"
 import locationRoutes from "./routes/locationRoutes.js"
 import physiologicalHealthRoutes from "./routes/physiologicalHealthRoutes.js"
 import stressDataRoutes from "./routes/stressDataRoutes.js";
+import "./cron/stressJob.js";
+
 
 dotenv.config();
 const app = express();

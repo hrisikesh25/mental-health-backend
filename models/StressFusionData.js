@@ -1,20 +1,17 @@
+// models/StressFusionData.js
 import mongoose from "mongoose";
 
-const stressFusionSchema = new mongoose.Schema(
-  {
-    stressScore: { type: Number, required: true },
-    predicted: { type: [Number], default: [] },
-    actual: { type: [Number], default: [] },
-    avgHeartRate: { type: Number },
-    avgSteps: { type: Number },
-    avgSpO2: { type: Number },
-    avgTemperature: { type: Number },
-    avgVoiceStress: { type: Number },
-    avgFaceStress: { type: Number },
-  },
-  { timestamps: true } // adds createdAt & updatedAt automatically
-);
+const stressFusionSchema = new mongoose.Schema({
+  stressScore: Number,
+  predicted: [Number],
+  actual: [Number],
+  avgHeartRate: Number,
+  avgSteps: Number,
+  avgSpO2: Number,
+  avgTemperature: Number,
+  avgVoiceStress: Number,
+  avgFaceStress: Number,
+  createdAt: { type: Date, default: Date.now },
+});
 
-const StressFusionData = mongoose.model("StressFusionData", stressFusionSchema);
-
-export default StressFusionData;
+export default mongoose.model("StressFusionData", stressFusionSchema);
