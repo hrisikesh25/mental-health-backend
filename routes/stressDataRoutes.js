@@ -1,5 +1,5 @@
 import express from "express";
-import { getStressData } from "../controllers/stressController.js";
+import { getStressData } from "../controllers/stressDataController.js";
 
 const router = express.Router();
 
