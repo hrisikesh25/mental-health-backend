@@ -8,6 +8,7 @@ import voiceEmotionRoutes from "./routes/voiceEmotionRoutes.js"
 import facialEmotionRoutes from "./routes/facialEmotionRoutes.js"
 import locationRoutes from "./routes/locationRoutes.js"
 import physiologicalHealthRoutes from "./routes/physiologicalHealthRoutes.js"
+import stressRoutes from "./routes/stressRoutes.js";
 
 dotenv.config();
 const app = express();
@@ -30,6 +31,7 @@ app.use("/api/voiceemotion", voiceEmotionRoutes)
 app.use("/api/facialemotion", facialEmotionRoutes)
 app.use("/api/location", locationRoutes)
 app.use("/api/physiological-health", physiologicalHealthRoutes)
+app.use("/api", stressRoutes);
 
 // Test route
 app.get("/api/test", (req, res) => {
